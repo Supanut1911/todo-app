@@ -17,8 +17,6 @@ const Signin: FC<Props> = (props): JSX.Element => {
   };
 
   const handleSubmit = async () => {
-    console.log("xxx", `${process.env.NEXT_PUBLIC_API_URL}/auth/login`);
-
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
       method: "POST",
       body: JSON.stringify(stateLogin),
@@ -29,7 +27,7 @@ const Signin: FC<Props> = (props): JSX.Element => {
     if (res.ok) {
       const json = await res.json();
       localStorage.setItem("token", json.token);
-      router.push("/user");
+      router.push("/todo");
     } else {
       alert("Bad credentials");
     }

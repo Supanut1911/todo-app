@@ -7,7 +7,7 @@ interface Profile {
   username: string;
 }
 
-const layoutAutheticated: FC<Props> = (props): JSX.Element => {
+const LayoutAutheticated: FC<Props> = (props): JSX.Element => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [profile, setProfile] = useState<Profile>();
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -19,15 +19,12 @@ const layoutAutheticated: FC<Props> = (props): JSX.Element => {
   }, []);
 
   async function fetchProfile() {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/test/profile`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    );
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/profile`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
     if (res.ok) {
       const json = await res.json();
       setProfile(json);
@@ -50,4 +47,4 @@ const layoutAutheticated: FC<Props> = (props): JSX.Element => {
   );
 };
 
-export default layoutAutheticated;
+export default LayoutAutheticated;
